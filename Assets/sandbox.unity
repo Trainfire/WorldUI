@@ -488,8 +488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8194e6bb712f4478f3eba6abcd2eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Affector: {fileID: 450948995}
-  SurfaceWidth: 0.8
+  _affector: {fileID: 450948995}
+  _surfaceWidth: 0.8
 --- !u!1 &681756336
 GameObject:
   m_ObjectHideFlags: 0
