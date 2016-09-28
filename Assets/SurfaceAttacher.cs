@@ -31,7 +31,10 @@ public class SurfaceAttacher : MonoBehaviour
                 var left = hit.point - perpDirection * _surfaceWidth / 2f;
                 var right = hit.point + perpDirection * _surfaceWidth / 2f;
 
-                _positionValid = hit.collider.bounds.Contains(left) && hit.collider.bounds.Contains(right);
+                // Don't update if the hit normal is up or down.
+                bool isUp = Vector3.Dot(hit.normal, Vector3.up) > 0f;
+
+                _positionValid = hit.collider.bounds.Contains(left) && hit.collider.bounds.Contains(right) && !isUp;
 
                 Debug.DrawLine(left, right, Color.gray);
                 Debug.DrawLine(hit.point, hit.point + hit.normal * 1f, Color.black);
