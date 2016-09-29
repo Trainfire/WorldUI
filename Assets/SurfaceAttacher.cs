@@ -3,13 +3,19 @@ using System.Collections;
 
 public class SurfaceAttacher : MonoBehaviour
 {
-    [SerializeField] private GameObject _affector;
+    [SerializeField] private WorldElement _affector;
     [SerializeField] private float _surfaceWidth;
 
     private bool _positionValid;
 
     void LateUpdate()
     {
+        if (Input.GetMouseButtonDown(1))
+            _affector.Show();
+
+        if (Input.GetMouseButtonUp(1))
+            _affector.Hide();
+
         if (Input.GetMouseButton(1))
         {
             RaycastHit hit;
