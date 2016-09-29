@@ -24,31 +24,33 @@ public class SurfaceAttacher : MonoBehaviour
 
             if (hit.collider != null)
             {
-                // Get top point of collider.
-                var top = hit.collider.bounds.center + Vector3.up * hit.collider.bounds.extents.y;
-
-                // Get top edge of surface.
-                var topEdge = new Vector3(hit.point.x, top.y, hit.point.z);
-
-                // Get a right-facing direction parallel to the surface.
-                var perpDirection = Vector3.Cross(hit.normal, hit.transform.up);
+                var surface = new SurfaceHelper(hit);
 
                 // Check if the left and right points are within the width of the surface.
-                var left = hit.point - perpDirection * _surfaceWidth / 2f;
-                var right = hit.point + perpDirection * _surfaceWidth / 2f;
+                var left = hit.point - surface.Cross * _surfaceWidth / 2f;
+                var right = hit.point + surface.Cross * _surfaceWidth / 2f;
 
                 // Don't update if the hit normal is up or down.
                 bool isUp = Vector3.Dot(hit.normal, Vector3.up) > 0f;
 
-                _positionValid = hit.collider.bounds.Contains(left) && hit.collider.bounds.Contains(right) && !isUp;
+                _positionValid = hit.collider.bounds.Contains(left) && hit.collider.bounds.Contains(right) && !isUp;  
 
                 Debug.DrawLine(left, right, Color.gray);
                 Debug.DrawLine(hit.point, hit.point + hit.normal * 1f, Color.black);
-                Debug.DrawLine(topEdge, topEdge + hit.normal * 1f, Color.green);
+                Debug.DrawLine(surface.Top, surface.Top + hit.normal * 1f, Color.green);
+
+                Debug.DrawLine(surface.Top, surface.Top + hit.normal * 1f, Color.red);
+                Debug.DrawLine(surface.Left, surface.Left + hit.normal * 1f, Color.red);
+                Debug.DrawLine(surface.Right, surface.Right + hit.normal * 1f, Color.red);
+                Debug.DrawLine(surface.Bottom, surface.Bottom + hit.normal * 1f, Color.red);
+                Debug.DrawLine(surface.Center, surface.Center + hit.normal * 0.5f, Color.red);
+
+                Debug.Log("Height: " + surface.Height);
 
                 if (_positionValid)
                 {
-                    _affector.transform.position = topEdge;
+                    //return new Vector3(_hit.point.x, top.y, _hit.point.z);
+                    _affector.transform.position = new Vector3(hit.point.x, surface.Top.y, hit.point.z);
                     _affector.transform.rotation = Quaternion.LookRotation(-hit.normal);
                 }
             }
