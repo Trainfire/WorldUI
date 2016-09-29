@@ -30,6 +30,11 @@ namespace Framework
             OnDone = onDone;
         }
 
+        public void Stop()
+        {
+            DoTween = false;
+        }
+
         protected abstract T OnTween(float delta);
 
         void IMonoUpdateReceiver.OnUpdate()
