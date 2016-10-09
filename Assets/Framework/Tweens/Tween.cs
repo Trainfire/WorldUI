@@ -8,6 +8,7 @@ namespace Framework
     {
         public UnityAction<T> OnTweenValue;
         public float Duration;
+        public AnimationCurve Curve;
         public bool DoTween = false;
 
         public T Value { get; private set; }
@@ -37,6 +38,11 @@ namespace Framework
 
         protected abstract T OnTween(float delta);
 
+        T DefaultCurve(T value)
+        {
+            return value;
+        }
+
         void IMonoUpdateReceiver.OnUpdate()
         {
             if (DoTween)
@@ -48,7 +54,12 @@ namespace Framework
 
             if (Tweening)
             {
-                Value = OnTween(CurrentTime / Duration);
+                float t = CurrentTime / Duration;
+
+                if (Curve != null)
+                    t = Curve.Evaluate(t);
+
+                Value = OnTween(t);
 
                 if (OnTweenValue != null)
                     OnTweenValue(Value);
