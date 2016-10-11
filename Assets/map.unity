@@ -444,6 +444,7 @@ GameObject:
   - 223: {fileID: 237214467}
   - 114: {fileID: 237214466}
   - 114: {fileID: 237214465}
+  - 225: {fileID: 237214469}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -526,6 +527,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &237214469
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237214464}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &311710926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1326,6 +1338,9 @@ GameObject:
   - 4: {fileID: 699256920}
   - 114: {fileID: 699256923}
   - 114: {fileID: 699256921}
+  - 114: {fileID: 699256922}
+  - 114: {fileID: 699256925}
+  - 114: {fileID: 699256926}
   m_Layer: 8
   m_Name: Map
   m_TagString: Untagged
@@ -1357,6 +1372,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59675d7fc4936a41a98b9843dedda1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &699256922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 699256919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4f84f41005b2dc4b817ed5588e4168d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enabled: 1
   _curve:
     serializedVersion: 2
     m_Curve:
@@ -1390,6 +1417,68 @@ MonoBehaviour:
   WorldRoot: {fileID: 1299331605}
   WorldPlayer: {fileID: 1570807734}
   MapScale: 0.25
+--- !u!114 &699256925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 699256919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690b17807dc1f824c9938a5bf689ed46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enabled: 1
+  _canvas: {fileID: 237214469}
+  _duration: 0.4
+  _curve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &699256926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 699256919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2271dc5bdda2fc34ba679bb4ef0ad573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enabled: 1
+  _aberration: {fileID: 1241097565}
+  _initialStrength: 50
+  _targetStrength: 13
+  _duration: 0.4
+  _curve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &759644306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,6 +1918,8 @@ GameObject:
   - 114: {fileID: 1241097564}
   - 114: {fileID: 1241097565}
   - 114: {fileID: 1241097566}
+  - 114: {fileID: 1241097568}
+  - 114: {fileID: 1241097567}
   m_Layer: 0
   m_Name: Map Camera
   m_TagString: Untagged
@@ -1891,7 +1982,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1241097563}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a22b3a7095a744a428c134b5e26ad68e, type: 3}
   m_Name: 
@@ -1902,6 +1993,61 @@ MonoBehaviour:
   maxBlurSize: 7.9
   downsample: 0
   tiltShiftShader: {fileID: 4800000, guid: bf34d2a25450349699e8ae6456fa7ca9, type: 3}
+--- !u!114 &1241097567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1241097563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9191284b058eef549b7108b5f04e1117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensityMultiplier: 1.33
+  generalIntensity: 0.591
+  blackIntensity: 1
+  whiteIntensity: 1
+  midGrey: 0.61
+  dx11Grain: 0
+  softness: 0.99
+  monochrome: 0
+  intensities: {x: 1, y: 1, z: 1}
+  tiling: {x: 64, y: 64, z: 64}
+  monochromeTiling: 64
+  filterMode: 1
+  noiseTexture: {fileID: 2800000, guid: 7a632f967e8ad42f5bd275898151ab6a, type: 3}
+  noiseShader: {fileID: 4800000, guid: b0249d8c935344451aa4de6db76f0688, type: 3}
+  dx11NoiseShader: {fileID: 4800000, guid: 8b30686bb4322ab42ad5eb50a0210b58, type: 3}
+--- !u!114 &1241097568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1241097563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd70d448b18cfbc46af26466f752332c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualizeFocus: 0
+  focalLength: 10
+  focalSize: 0
+  aperture: 0.672
+  focalTransform: {fileID: 0}
+  maxBlurSize: 1
+  highResolution: 1
+  blurType: 0
+  blurSampleCount: 2
+  nearBlur: 0
+  foregroundOverlap: 2
+  dofHdrShader: {fileID: 4800000, guid: acd613035ff3e455e8abf23fdc8c8c24, type: 3}
+  dx11BokehShader: {fileID: 4800000, guid: d8e82664aa8686642a424c88ab10164a, type: 3}
+  dx11BokehThreshold: 0.5
+  dx11SpawnHeuristic: 0.0875
+  dx11BokehTexture: {fileID: 2800000, guid: a4cdca73d61814d33ac1587f6c163bca, type: 3}
+  dx11BokehScale: 1.2
+  dx11BokehIntensity: 2.5
 --- !u!20 &1241097570
 Camera:
   m_ObjectHideFlags: 0
