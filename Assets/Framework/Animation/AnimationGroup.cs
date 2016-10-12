@@ -6,15 +6,15 @@ using Framework;
 
 namespace Framework.Animation
 {
-    public class UIAnimationGroup : MonoBehaviour
+    public class AnimationGroup : MonoBehaviour
     {
-        public event Action<UIAnimationGroup> Completed;
+        public event Action<AnimationGroup> Completed;
 
-        private List<UIAnimation> _animations;
+        private List<AnimationBase> _animations;
 
         public void Play()
         {            
-            _animations = GetComponents<UIAnimation>().ToList();
+            _animations = GetComponents<AnimationBase>().ToList();
 
             foreach (var anim in _animations)
             {

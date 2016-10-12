@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Framework.Animation
 {
-    class UIAnimationFader : UIAnimation
+    class AnimationFader : AnimationBase
     {
         [SerializeField]
         private FadeType _fadeType;

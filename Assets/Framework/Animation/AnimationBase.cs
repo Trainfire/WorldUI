@@ -11,17 +11,17 @@ namespace Framework.Animation
         PlayComplete,
     }
 
-    public class AnimationEvent : EventBase<UIAnimation>
+    public class AnimationEvent : EventBase<AnimationBase>
     {
         public AnimationEventType PlaybackType { get; private set; }
 
-        public AnimationEvent(UIAnimation sender, AnimationEventType playbackType) : base(sender)
+        public AnimationEvent(AnimationBase sender, AnimationEventType playbackType) : base(sender)
         {
             PlaybackType = playbackType;
         }
     }
 
-    public abstract class UIAnimation : MonoBehaviour
+    public abstract class AnimationBase : MonoBehaviour
     {
         public event Action<AnimationEvent> Triggered;
 

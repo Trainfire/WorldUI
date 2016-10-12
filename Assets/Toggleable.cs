@@ -12,8 +12,8 @@ public class Toggleable : MonoBehaviour
     public event Action Hidden;
 
     [SerializeField] private bool _autoDisable;
-    [SerializeField] private UIAnimationGroup _showAnimations;
-    [SerializeField] private UIAnimationGroup _hideAnimations;
+    [SerializeField] private AnimationGroup _showAnimations;
+    [SerializeField] private AnimationGroup _hideAnimations;
 
     private bool _isShowing;
 
@@ -85,7 +85,7 @@ public class Toggleable : MonoBehaviour
         }
     }
 
-    void OnHideAnimationsComplete(UIAnimationGroup obj)
+    void OnHideAnimationsComplete(AnimationGroup obj)
     {
         FinishHide();
     }

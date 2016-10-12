@@ -11,10 +11,10 @@ class WorldElementAnimator : MonoBehaviour
     public event Action<WorldElementAnimator> HideComplete;
 
     [SerializeField]
-    private List<UIAnimation> _showAnimations;
+    private List<AnimationBase> _showAnimations;
 
     [SerializeField]
-    private List<UIAnimation> _hideAnimations;
+    private List<AnimationBase> _hideAnimations;
 
     private Toggleable _worldElement;
 

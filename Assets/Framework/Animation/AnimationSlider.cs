@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Framework.Animation
 {
-    class UIAnimationSlider : UIAnimation
+    class AnimationSlider : AnimationBase
     {
         [SerializeField]
         private Vector2 _position;
