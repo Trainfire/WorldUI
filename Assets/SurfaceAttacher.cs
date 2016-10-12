@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SurfaceAttacher : MonoBehaviour
 {
-    [SerializeField] private WorldElement _affector;
+    [SerializeField] private Toggleable _affector;
     [SerializeField] private float _surfaceWidth;
 
     private bool _positionValid;
@@ -44,8 +44,6 @@ public class SurfaceAttacher : MonoBehaviour
                 Debug.DrawLine(surface.Right, surface.Right + hit.normal * 1f, Color.red);
                 Debug.DrawLine(surface.Bottom, surface.Bottom + hit.normal * 1f, Color.red);
                 Debug.DrawLine(surface.Center, surface.Center + hit.normal * 0.5f, Color.red);
-
-                Debug.Log("Height: " + surface.Height);
 
                 if (_positionValid)
                 {

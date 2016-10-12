@@ -18,18 +18,34 @@ public class MiniMapAnimAberration : MiniMapAnimation
     [SerializeField]
     private AnimationCurve _curve;
 
-    protected override void OnShow()
+    protected override void OnPlayIn()
     {
-        base.OnShow();
-
         _aberration.chromaticAberration = _initialStrength;
 
+        var lerp = TweenHelper.Create(_initialStrength, _targetStrength, _duration);
+        lerp.OnTweenValue += OnTween;
+        lerp.OnDone += OnTweenDone;
+        lerp.Play();
+    }
+
+    protected override void OnPlayOut()
+    {
         var lerp = new TweenFloat();
-        lerp.From = _initialStrength;
-        lerp.To = _targetStrength;
+        lerp.From = _aberration.chromaticAberration;
+        lerp.To = _initialStrength;
         lerp.Duration = _duration;
         lerp.OnTweenValue += OnTween;
+        lerp.OnDone += OnTweenDone;
         lerp.Play();
+    }
+
+    private void OnTweenDone(Tween<float> obj)
+    {
+        obj.OnTweenValue -= OnTween;
+        obj.OnDone -= OnTweenDone;
+
+        if (State == AnimationState.Out)
+            TriggerPlayOutComplete();
     }
 
     void OnTween(float v)

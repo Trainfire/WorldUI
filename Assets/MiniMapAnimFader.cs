@@ -12,10 +12,8 @@ public class MiniMapAnimFader : MiniMapAnimation
     [SerializeField]
     private AnimationCurve _curve;
 
-    protected override void OnShow()
+    protected override void OnPlayIn()
     {
-        base.OnShow();
-
         _canvas.alpha = 0f;
 
         var lerp = new TweenFloat();
@@ -23,7 +21,26 @@ public class MiniMapAnimFader : MiniMapAnimation
         lerp.To = 1f;
         lerp.Duration = _duration;
         lerp.OnTweenValue += OnTween;
+        //lerp.OnDone += OnTweenDone;
         lerp.Play();
+    }
+
+    protected override void OnPlayOut()
+    {
+        var lerp = new TweenFloat();
+        lerp.From = 1f;
+        lerp.To = 0f;
+        lerp.Duration = _duration;
+        lerp.OnTweenValue += OnTween;
+        lerp.OnDone += OnTweenDone;
+        lerp.Play();
+    }
+
+    void OnTweenDone(Tween<float> obj)
+    {
+        obj.OnTweenValue -= OnTween;
+        obj.OnDone -= OnTweenDone;
+        //TriggerPlayOutComplete();
     }
 
     void OnTween(float v)

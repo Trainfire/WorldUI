@@ -12,9 +12,9 @@ public class MiniMapAnimScale : MiniMapAnimation
     [SerializeField]
     private float _duration;
 
-    protected override void OnShow()
+    protected override void OnPlayIn()
     {
-        base.OnShow();
+        base.OnPlayIn();
 
         var lerp = new TweenVector3();
         lerp.From = _initialScale;
@@ -22,7 +22,28 @@ public class MiniMapAnimScale : MiniMapAnimation
         lerp.Duration = _duration;
         lerp.OnTweenValue += OnTween;
         lerp.Curve = _curve;
+        lerp.OnDone += OnLerpDone;
         lerp.Play();
+    }
+
+    protected override void OnPlayOut()
+    {
+        var lerp = new TweenVector3();
+        lerp.From = _targetScale;
+        lerp.To = _initialScale;
+        lerp.Duration = _duration;
+        lerp.OnTweenValue += OnTween;
+        lerp.Curve = _curve;
+        lerp.OnDone += OnLerpDone;
+        lerp.Play();
+    }
+
+    void OnLerpDone(Tween<Vector3> tweener)
+    {
+        tweener.OnDone -= OnLerpDone;
+
+        if (State == AnimationState.Out)
+            TriggerPlayOutComplete();
     }
 
     void OnTween(Vector3 v)

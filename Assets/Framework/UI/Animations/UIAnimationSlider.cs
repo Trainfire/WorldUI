@@ -1,28 +1,40 @@
 using UnityEngine;
 
-namespace Framework.UI
+namespace Framework.Animation
 {
     class UIAnimationSlider : UIAnimation
     {
         [SerializeField]
         private Vector2 _position;
 
+        private RectTransform _rectTransform;
         private TweenVector2 _tweenVec;
 
         void Start()
         {
+            _rectTransform = Target.GetComponent<RectTransform>();
+
             _tweenVec = new TweenVector2();
             _tweenVec.OnTweenValue += OnTween;
+            _tweenVec.OnDone += OnTweenDone;
+        }
+
+        private void OnTweenDone(Tween<Vector2> obj)
+        {
+            TriggerPlayComplete();
         }
 
         protected override void OnPlay()
         {
             base.OnPlay();
 
-            _tweenVec.Duration = Duration;
-            _tweenVec.From = Target.anchoredPosition;
-            _tweenVec.To = _position;
-            _tweenVec.Play();
+            if (_rectTransform != null)
+            {
+                _tweenVec.Duration = Duration;
+                _tweenVec.From = _rectTransform.anchoredPosition;
+                _tweenVec.To = _position;
+                _tweenVec.Play();
+            }
         }
 
         protected override void OnStop()
@@ -33,7 +45,7 @@ namespace Framework.UI
 
         void OnTween(Vector2 v)
         {
-            Target.anchoredPosition = v;
+            _rectTransform.anchoredPosition = v;
         }
     }
 }

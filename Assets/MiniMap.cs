@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections.Generic;
+using Framework;
 
 public class MiniMap : MonoBehaviour
 {
@@ -8,8 +8,15 @@ public class MiniMap : MonoBehaviour
     public float MapScale;
 
     private GameObject _mapRoot;
+    private Toggleable _toggleable;
 
-    void OnEnable()
+    void Awake()
+    {
+        _toggleable = gameObject.GetOrAddComponent<Toggleable>();
+        _toggleable.Showed += OnShow;
+    }
+
+    void OnShow()
     {
         Generate();
     }
@@ -39,17 +46,6 @@ public class MiniMap : MonoBehaviour
         {
             _mapRoot.transform.localScale = Vector3.one * MapScale;
             _mapRoot.transform.position = transform.position - WorldPlayer.transform.position * _mapRoot.transform.localScale.x;
-        }
-    }
-}
-
-public static class GameObjectEx
-{
-    public static void SetLayers(this GameObject go, int layer)
-    {
-        foreach (Transform t in go.transform)
-        {
-            t.gameObject.layer = layer;
         }
     }
 }

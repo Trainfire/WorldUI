@@ -6,6 +6,7 @@ namespace Framework
 {
     public abstract class Tween<T> : IMonoUpdateReceiver
     {
+        public event Action<Tween<T>> OnDone;
         public UnityAction<T> OnTweenValue;
         public float Duration;
         public AnimationCurve Curve;
@@ -17,18 +18,16 @@ namespace Framework
 
         public bool Tweening { get; set; }
         float CurrentTime { get; set; }
-        UnityAction OnDone { get; set; }
 
         public Tween()
         {
             MonoEventRelay.RegisterForUpdate(this);
         }
 
-        public void Play(UnityAction onDone = null)
+        public void Play()
         {
             CurrentTime = 0f;
             DoTween = true;
-            OnDone = onDone;
         }
 
         public void Stop()
@@ -73,9 +72,21 @@ namespace Framework
                     Tweening = false;
 
                     if (OnDone != null)
-                        OnDone();
+                        OnDone(this);
                 }
             }
+        }
+    }
+
+    public static class TweenHelper
+    {
+        public static TweenFloat Create(float from, float to, float duration)
+        {
+            var tween = new TweenFloat();
+            tween.From = from;
+            tween.To = to;
+            tween.Duration = duration;
+            return tween;
         }
     }
 }

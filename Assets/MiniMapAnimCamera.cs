@@ -15,9 +15,9 @@ public class MiniMapAnimCamera : MiniMapAnimation
     [SerializeField]
     private AnimationCurve _curve;
 
-    protected override void OnShow()
+    protected override void OnPlayIn()
     {
-        base.OnShow();
+        base.OnPlayIn();
 
         _fisheye.strengthX = _initialStrength.x;
         _fisheye.strengthY = _initialStrength.y;
@@ -27,7 +27,15 @@ public class MiniMapAnimCamera : MiniMapAnimation
         lerp.To = Vector2.zero;
         lerp.Duration = _duration;
         lerp.OnTweenValue += OnTween;
+        lerp.OnDone += OnTweenDone;
         lerp.Play();
+    }
+
+    void OnTweenDone(Tween<Vector2> tweener)
+    {
+        tweener.OnTweenValue -= OnTween;
+        tweener.OnDone -= OnTweenDone;
+        TriggerPlayOutComplete();
     }
 
     void OnTween(Vector2 v)

@@ -76,6 +76,14 @@ namespace Framework
 
     static class GameObjectEx
     {
+        public static void SetLayers(this GameObject go, int layer)
+        {
+            foreach (Transform t in go.transform)
+            {
+                t.gameObject.layer = layer;
+            }
+        }
+
         public static T GetComponent<T>(this GameObject obj, Action<T> onGet)
         {
             var comp = obj.GetComponent<T>();

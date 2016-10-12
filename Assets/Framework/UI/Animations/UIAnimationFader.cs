@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Framework.UI
+namespace Framework.Animation
 {
     class UIAnimationFader : UIAnimation
     {
@@ -10,12 +10,13 @@ namespace Framework.UI
         private CanvasGroup _canvasGroup;
         private TweenFloat _tweenFloat;
 
-        void Start()
+        void Awake()
         {
-            _canvasGroup = Target.gameObject.GetOrAddComponent<CanvasGroup>();
+            _canvasGroup = Target.GetOrAddComponent<CanvasGroup>();
 
             _tweenFloat = new TweenFloat();
             _tweenFloat.Duration = Duration;
+            _tweenFloat.OnDone += OnTweenDone;
             _tweenFloat.OnTweenValue += OnTween;
         }
 
@@ -26,6 +27,12 @@ namespace Framework.UI
             _tweenFloat.From = _canvasGroup.alpha;
             _tweenFloat.To = _fadeType == FadeType.In ? 1f : 0f;
             _tweenFloat.Play();
+        }
+
+        private void OnTweenDone(Tween<float> obj)
+        {
+            _canvasGroup.alpha = _tweenFloat.To;
+            TriggerPlayComplete();
         }
 
         protected override void OnStop()

@@ -1,21 +1,26 @@
 using UnityEngine;
-using Framework.UI;
+using System;
 using System.Collections.Generic;
+using Framework;
+using Framework.Animation;
 
-[RequireComponent(typeof(WorldElement))]
+[RequireComponent(typeof(Toggleable))]
 class WorldElementAnimator : MonoBehaviour
 {
+    public event Action<WorldElementAnimator> ShowComplete;
+    public event Action<WorldElementAnimator> HideComplete;
+
     [SerializeField]
     private List<UIAnimation> _showAnimations;
 
     [SerializeField]
     private List<UIAnimation> _hideAnimations;
 
-    private WorldElement _worldElement;
+    private Toggleable _worldElement;
 
     void Start()
     {
-        _worldElement = GetComponent<WorldElement>();
+        _worldElement = GetComponent<Toggleable>();
         _worldElement.Showed += OnShow;
         _worldElement.Hidden += OnHide;
     }

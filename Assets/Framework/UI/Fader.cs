@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Framework.UI
+namespace Framework.Animation
 {
     public enum FadeType
     {
