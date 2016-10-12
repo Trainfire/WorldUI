@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 237214464}
-  _duration: 1
+  _duration: 0.4
   _curve:
     serializedVersion: 2
     m_Curve:
@@ -884,11 +884,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _showAnimations:
-  - {fileID: 1746877183}
-  - {fileID: 57232022}
+  - {fileID: 0}
+  - {fileID: 0}
   _hideAnimations:
-  - {fileID: 1587546092}
-  - {fileID: 1295397074}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &450949001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1569,7 +1569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 237214464}
-  _duration: 1
+  _duration: 0.4
   _curve:
     serializedVersion: 2
     m_Curve:

@@ -12,40 +12,32 @@ namespace Framework.Animation
 
         private List<AnimationBase> _animations;
 
-        public void Play()
-        {            
-            _animations = GetComponents<AnimationBase>().ToList();
+        void Awake()
+        {
+            _animations = new List<AnimationBase>();
 
-            foreach (var anim in _animations)
+            foreach (var anim in GetComponents<AnimationBase>())
             {
+                _animations.Add(anim);
                 anim.Triggered += OnAnimationTriggered;
-                anim.Play();
             }
+        }
+
+        public void Play()
+        {
+            _animations.ForEach(x => x.Play());
         }
 
         public void Stop()
         {
-            if (_animations != null)
-            {
-                foreach (var anim in _animations)
-                {
-                    anim.Triggered -= OnAnimationTriggered;
-                    anim.Stop();
-                }
-            }
+            _animations.ForEach(x => x.Stop());
         }
 
         void OnAnimationTriggered(AnimationEvent animEvent)
         {
             Debug.LogFormat("Anim '{0}' in group '{1}' changed to '{2}'", animEvent.Sender.GetType(), name, animEvent.PlaybackType);
 
-            if (animEvent.PlaybackType == AnimationEventType.PlayComplete && _animations.Contains(animEvent.Sender))
-            {
-                _animations.Remove(animEvent.Sender);
-                animEvent.Sender.Triggered -= OnAnimationTriggered;
-            }
-
-            if (_animations.Count == 0)
+            if (animEvent.PlaybackType == AnimationEventType.PlayComplete && _animations.TrueForAll(x => x.State == AnimationPlaybackState.Stopped))
                 Completed.InvokeSafe(this);
         }
     }

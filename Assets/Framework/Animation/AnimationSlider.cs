@@ -14,7 +14,7 @@ namespace Framework.Animation
         {
             _rectTransform = Target.GetComponent<RectTransform>();
 
-            _tweenVec = new TweenVector2();
+            _tweenVec = gameObject.AddComponent<TweenVector2>();
             _tweenVec.OnTweenValue += OnTween;
             _tweenVec.OnDone += OnTweenDone;
         }

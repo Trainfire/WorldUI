@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Framework
 {
-    public abstract class Tween<T> : IMonoUpdateReceiver
+    public abstract class Tween<T> : MonoBehaviour
     {
         public event Action<Tween<T>> OnDone;
         public UnityAction<T> OnTweenValue;
@@ -19,11 +19,6 @@ namespace Framework
         public bool Tweening { get; set; }
         float CurrentTime { get; set; }
 
-        public Tween()
-        {
-            MonoEventRelay.RegisterForUpdate(this);
-        }
-
         public void Play()
         {
             CurrentTime = 0f;
@@ -33,6 +28,7 @@ namespace Framework
         public void Stop()
         {
             DoTween = false;
+            Tweening = false;
         }
 
         protected abstract T OnTween(float delta);
@@ -42,7 +38,7 @@ namespace Framework
             return value;
         }
 
-        void IMonoUpdateReceiver.OnUpdate()
+        void Update()
         {
             if (DoTween)
             {

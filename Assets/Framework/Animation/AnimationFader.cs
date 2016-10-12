@@ -14,7 +14,7 @@ namespace Framework.Animation
         {
             _canvasGroup = Target.GetOrAddComponent<CanvasGroup>();
 
-            _tweenFloat = new TweenFloat();
+            _tweenFloat = gameObject.AddComponent<TweenFloat>();
             _tweenFloat.Duration = Duration;
             _tweenFloat.OnDone += OnTweenDone;
             _tweenFloat.OnTweenValue += OnTween;

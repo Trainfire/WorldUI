@@ -3,6 +3,12 @@ using System;
 
 namespace Framework.Animation
 {
+    public enum AnimationPlaybackState
+    {
+        Stopped,
+        Playing,
+    }
+
     public enum AnimationEventType
     {
         None,
@@ -32,15 +38,18 @@ namespace Framework.Animation
         protected GameObject Target { get { return _target; } }
         protected float Duration { get { return _duration; } }
         protected AnimationCurve Curve { get { return _curve; } }
+        public AnimationPlaybackState State { get; private set; }
 
         public void Play()
         {
+            State = AnimationPlaybackState.Playing;
             Triggered.InvokeSafe(new AnimationEvent(this, AnimationEventType.Playing));
             OnPlay();
         }
 
         public void Stop()
         {
+            State = AnimationPlaybackState.Stopped;
             Triggered.InvokeSafe(new AnimationEvent(this, AnimationEventType.Stopping));
             OnStop();
         }
@@ -50,6 +59,7 @@ namespace Framework.Animation
 
         protected void TriggerPlayComplete()
         {
+            State = AnimationPlaybackState.Stopped;
             Triggered.InvokeSafe(new AnimationEvent(this, AnimationEventType.PlayComplete));
         }
     }

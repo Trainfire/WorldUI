@@ -46,6 +46,8 @@ public class Toggleable : MonoBehaviour
 
     public virtual void Hide()
     {
+        _isShowing = false;
+
         if (_showAnimations != null)
             _showAnimations.Stop();
 
@@ -90,10 +92,8 @@ public class Toggleable : MonoBehaviour
         FinishHide();
     }
 
-    public void FinishHide()
+    void FinishHide()
     {
-        _isShowing = false;
-
         if (_autoDisable)
             gameObject.SetActive(false);
 
