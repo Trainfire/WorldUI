@@ -1,8 +1,17 @@
 using UnityEngine;
 using Framework;
+using System;
+
+public interface IMapElement
+{
+    void Update(MiniMap map);
+}
 
 public class MiniMap : MonoBehaviour
 {
+    public event Action<MiniMap> Shown;
+    public event Action<MiniMap> Hidden;
+
     public GameObject WorldRoot;
     public GameObject WorldPlayer;
     public float MapScale;
@@ -11,16 +20,25 @@ public class MiniMap : MonoBehaviour
 
     private GameObject _geometry;
     private Toggleable _toggleable;
+    private MiniMapObjectives _objectives;
 
     void Awake()
     {
         _toggleable = gameObject.GetOrAddComponent<Toggleable>();
         _toggleable.Showed += OnShow;
+        _toggleable.Hidden += OnHide;
+    }
+
+    void OnHide()
+    {
+        Hidden.InvokeSafe(this);
     }
 
     void OnShow()
     {
         Generate();
+
+        Shown.InvokeSafe(this);
     }
 
     void Generate()
@@ -47,7 +65,20 @@ public class MiniMap : MonoBehaviour
         if (_geometry != null)
         {
             _geometry.transform.localScale = Vector3.one * MapScale;
-            _geometry.transform.position = transform.position - WorldPlayer.transform.position * _geometry.transform.localScale.x;
+            _geometry.transform.position = Origin;
         }
+    }
+
+    /// <summary>
+    /// The local position of the world origin.
+    /// </summary>
+    public Vector3 Origin
+    {
+        get { return transform.position - WorldPlayer.transform.position * MapScale; }
+    }
+
+    public Vector3 GetPosition(Vector3 worldPosition)
+    {
+        return Origin + worldPosition * MapScale;
     }
 }
