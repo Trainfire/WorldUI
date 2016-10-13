@@ -10,7 +10,7 @@ namespace Framework.Animation
         private RectTransform _rectTransform;
         private TweenVector2 _tweenVec;
 
-        void Start()
+        void Awake()
         {
             _rectTransform = Target.GetComponent<RectTransform>();
 

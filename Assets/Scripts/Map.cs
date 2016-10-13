@@ -4,13 +4,13 @@ using System;
 
 public interface IMapElement
 {
-    void Update(MiniMap map);
+    void Update(Map map);
 }
 
-public class MiniMap : MonoBehaviour
+public class Map : MonoBehaviour
 {
-    public event Action<MiniMap> Shown;
-    public event Action<MiniMap> Hidden;
+    public event Action<Map> Shown;
+    public event Action<Map> Hidden;
 
     public GameObject WorldRoot;
     public GameObject WorldPlayer;
@@ -20,7 +20,7 @@ public class MiniMap : MonoBehaviour
 
     private GameObject _geometry;
     private Toggleable _toggleable;
-    private MiniMapObjectives _objectives;
+    private MapObjectives _objectives;
 
     void Awake()
     {

@@ -21,7 +21,7 @@ public class MapObjectiveMarker : UIDataView<ObjectiveMarker>, IMapElement
         _objectiveId.text = data.ID.ToString("D2");
     }
 
-    void IMapElement.Update(MiniMap map)
+    void IMapElement.Update(Map map)
     {
         transform.position = map.GetPosition(Data.transform.position);
     }
