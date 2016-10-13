@@ -1,12 +1,11 @@
+using System;
 using UnityEngine;
 
 namespace Framework.Animation
 {
     class AnimationFader : AnimationBase
     {
-        [SerializeField]
-        private FadeType _fadeType;
-
+        [SerializeField] private FadeType _fadeType;
         private CanvasGroup _canvasGroup;
         private TweenFloat _tweenFloat;
 
