@@ -13,7 +13,6 @@ namespace Framework.Animation
         void Awake()
         {
             _tweenVec = gameObject.AddComponent<TweenVector3>();
-            _tweenVec.Duration = Duration;
             _tweenVec.OnDone += OnTweenDone;
             _tweenVec.OnTweenValue += OnTween;
         }
@@ -23,6 +22,7 @@ namespace Framework.Animation
             base.OnPlay();
 
             _tweenVec.Curve = Curve;
+            _tweenVec.Duration = Duration;
             _tweenVec.From = _useFromValue ? _from : Target.transform.localScale;
             _tweenVec.To = _to;
             _tweenVec.Play();

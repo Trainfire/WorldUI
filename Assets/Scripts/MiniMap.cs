@@ -77,6 +77,16 @@ public class MiniMap : MonoBehaviour
         get { return transform.position - WorldPlayer.transform.position * MapScale; }
     }
 
+    public Vector3 PlayerPosition
+    {
+        get { return GetPosition(WorldPlayer.transform.position); }
+    }
+
+    /// <summary>
+    /// Translates a world position to a map position.
+    /// </summary>
+    /// <param name="worldPosition"></param>
+    /// <returns></returns>
     public Vector3 GetPosition(Vector3 worldPosition)
     {
         return Origin + worldPosition * MapScale;
