@@ -7,7 +7,9 @@ public class MiniMap : MonoBehaviour
     public GameObject WorldPlayer;
     public float MapScale;
 
-    private GameObject _mapRoot;
+    [SerializeField] private Transform _root;
+
+    private GameObject _geometry;
     private Toggleable _toggleable;
 
     void Awake()
@@ -23,16 +25,16 @@ public class MiniMap : MonoBehaviour
 
     void Generate()
     {
-        if (_mapRoot != null)
-            Destroy(_mapRoot);
+        if (_geometry != null)
+            Destroy(_geometry);
 
         var layer = LayerMask.NameToLayer("MiniMap");
 
-        _mapRoot = Instantiate(WorldRoot);
-        _mapRoot.layer = layer;
-        _mapRoot.transform.SetParent(transform, false);
+        _geometry = Instantiate(WorldRoot);
+        _geometry.layer = layer;
+        _geometry.transform.SetParent(_root, false);
 
-        foreach (Transform t in _mapRoot.transform)
+        foreach (Transform t in _root.transform)
         {
             t.gameObject.SetLayers(layer);
         }
@@ -42,10 +44,10 @@ public class MiniMap : MonoBehaviour
     {
         transform.position = WorldPlayer.transform.position;
 
-        if (_mapRoot != null)
+        if (_geometry != null)
         {
-            _mapRoot.transform.localScale = Vector3.one * MapScale;
-            _mapRoot.transform.position = transform.position - WorldPlayer.transform.position * _mapRoot.transform.localScale.x;
+            _geometry.transform.localScale = Vector3.one * MapScale;
+            _geometry.transform.position = transform.position - WorldPlayer.transform.position * _geometry.transform.localScale.x;
         }
     }
 }
