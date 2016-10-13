@@ -31,6 +31,9 @@ public class Map : MonoBehaviour
 
     void OnHide()
     {
+        if (_geometry != null)
+            Destroy(_geometry);
+
         Hidden.InvokeSafe(this);
     }
 
@@ -43,9 +46,6 @@ public class Map : MonoBehaviour
 
     void Generate()
     {
-        if (_geometry != null)
-            Destroy(_geometry);
-
         var layer = LayerMask.NameToLayer("MiniMap");
 
         _geometry = Instantiate(WorldRoot);
