@@ -30,6 +30,7 @@ namespace Framework.Animation
 
             if (_rectTransform != null)
             {
+                _tweenVec.Curve = Curve;
                 _tweenVec.Duration = Duration;
                 _tweenVec.From = _rectTransform.anchoredPosition;
                 _tweenVec.To = _position;
