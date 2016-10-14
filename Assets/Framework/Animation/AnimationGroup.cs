@@ -11,6 +11,7 @@ namespace Framework.Animation
         public event Action<AnimationGroup> Completed;
 
         private List<AnimationBase> _animations;
+        private Queue<AnimationBase> _queue;
 
         void Awake()
         {
@@ -21,11 +22,23 @@ namespace Framework.Animation
                 _animations.Add(anim);
                 anim.Triggered += OnAnimationTriggered;
             }
+
+            _queue = new Queue<AnimationBase>();
         }
 
         public void Play()
         {
-            _animations.ForEach(x => x.Play());
+            if (_animations.Any(x => x.WaitForCompletion))
+            {
+                Debug.Log("Using queue system...");
+                _queue.Clear();
+                _animations.ForEach(x => _queue.Enqueue(x));
+                _queue.Peek().Play();
+            }
+            else
+            {
+                _animations.ForEach(x => x.Play());
+            }
         }
 
         public void Stop()
@@ -35,10 +48,31 @@ namespace Framework.Animation
 
         void OnAnimationTriggered(AnimationEvent animEvent)
         {
-            //Debug.LogFormat("Anim '{0}' in group '{1}' changed to '{2}'", animEvent.Sender.GetType(), name, animEvent.PlaybackType);
+            if (animEvent.PlaybackType == AnimationEventType.PlayComplete)
+            {
+                if (_animations.Any(x => x.WaitForCompletion))
+                {
+                    if (animEvent.Sender == _queue.Peek())
+                    {
+                        _queue.Dequeue();
 
-            if (animEvent.PlaybackType == AnimationEventType.PlayComplete && _animations.TrueForAll(x => x.State == AnimationPlaybackState.Stopped))
-                Completed.InvokeSafe(this);
+                        if (_queue.Count == 0)
+                        {
+                            Completed.InvokeSafe(this);
+                        }
+                        else
+                        {
+                            var next = _queue.Peek();
+                            Debug.Log("Playing next anim: " + next.GetType().Name);
+                            next.Play();
+                        }
+                    }
+                }
+                else if (_animations.TrueForAll(x => x.State == AnimationPlaybackState.Stopped))
+                {
+                    Completed.InvokeSafe(this);
+                }
+            }
         }
     }
 }

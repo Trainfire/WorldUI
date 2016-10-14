@@ -34,11 +34,13 @@ namespace Framework.Animation
         [SerializeField] private GameObject _target;
         [SerializeField] private float _duration;
         [SerializeField] private AnimationCurve _curve;
+        [SerializeField] private bool _waitForCompletion;
 
         protected GameObject Target { get { return _target; } }
         protected float Duration { get { return _duration; } }
         protected AnimationCurve Curve { get { return _curve; } }
         public AnimationPlaybackState State { get; private set; }
+        public bool WaitForCompletion { get { return _waitForCompletion; } }
 
         public void Play()
         {
