@@ -15,6 +15,7 @@ public class Map : MonoBehaviour
     public GameObject WorldRoot;
     public GameObject WorldPlayer;
     public float MapScale;
+    public Material MapMaterial;
 
     [SerializeField] private Transform _root;
 
@@ -55,6 +56,11 @@ public class Map : MonoBehaviour
         foreach (Transform t in _root.transform)
         {
             t.gameObject.SetLayers(layer);
+        }
+
+        foreach (var t in _root.GetComponentsInChildren<Renderer>())
+        {
+            t.material = MapMaterial;
         }
     }
 
