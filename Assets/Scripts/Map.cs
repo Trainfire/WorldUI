@@ -23,6 +23,8 @@ public class Map : MonoBehaviour
     private Toggleable _toggleable;
     private MapObjectives _objectives;
 
+    public Toggleable Toggleable { get { return _toggleable; } }
+
     void Awake()
     {
         _toggleable = gameObject.GetOrAddComponent<Toggleable>();

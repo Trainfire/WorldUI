@@ -6,6 +6,8 @@ using System.Linq;
 [RequireComponent(typeof(Map))]
 public class MapObjectives : MonoBehaviour
 {
+    [SerializeField] private ToggleableEventType _showTrigger;
+    [SerializeField] private ToggleableEventType _hideTrigger;
     [SerializeField] private MapObjectiveMarker _prototype;
 
     private Map _miniMap;
@@ -13,27 +15,31 @@ public class MapObjectives : MonoBehaviour
 
     void Awake()
     {
-        _miniMap = GetComponent<Map>();
-        _miniMap.Shown += OnMiniMapShow;
-        _miniMap.Hidden += OnMiniMapHide;
-
         _markers = new List<MapObjectiveMarker>();
     }
 
-    void OnMiniMapHide(Map obj)
+    void Start()
     {
-        foreach (var marker in _markers)
+        _miniMap = GetComponent<Map>();
+        _miniMap.Shown += OnMiniMapShow;
+        _miniMap.Toggleable.Triggered += OnMiniMapTriggered;
+    }
+
+    void OnMiniMapTriggered(ToggleableEventType obj)
+    {
+        if (obj == _hideTrigger)
         {
-            var toggleable = marker.GetComponent<Toggleable>();
-            if (toggleable)
-                toggleable.Hide();
+            Debug.Log("Hide started...");
+            _markers.ForEach(x => x.GetComponent<Toggleable>().Hide());
+        }
+        else if (obj == _showTrigger)
+        {
+            _markers.ForEach(x => x.GetComponent<Toggleable>().Show());
         }
     }
 
     void OnMiniMapShow(Map miniMap)
     {
-        Debug.Log("Mini map shown...");
-
         _markers.ForEach(x => Destroy(x.gameObject));
         _markers.Clear();
 

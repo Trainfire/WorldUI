@@ -208,6 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c1823dcbd50784d948f3a527dfb7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showTrigger: 1
+  _hideTrigger: 2
   _prototype: {fileID: 114000010838103942, guid: d9f96cb15ee654e4dad4dae494f15673,
     type: 2}
 --- !u!114 &29269406
@@ -221,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a96351ad971254886bf7e7afe77991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trigger: 3
+  _trigger: 2
   _action: 1
   _targets:
   - {fileID: 562384275}
@@ -727,7 +729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1126765205}
-  _duration: 0.4
+  _duration: 0.6
   _curve:
     serializedVersion: 2
     m_Curve:
@@ -1626,7 +1628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1126765205}
-  _duration: 0.4
+  _duration: 0.6
   _curve:
     serializedVersion: 2
     m_Curve:
@@ -2789,6 +2791,26 @@ Prefab:
       propertyPath: _autoDisable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010653352406, guid: 9d3306e17b664d148911ebce87ad8984,
+        type: 2}
+      propertyPath: _duration
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013394925670, guid: 9d3306e17b664d148911ebce87ad8984,
+        type: 2}
+      propertyPath: _duration
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012797491108, guid: 9d3306e17b664d148911ebce87ad8984,
+        type: 2}
+      propertyPath: _curve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012797491108, guid: 9d3306e17b664d148911ebce87ad8984,
+        type: 2}
+      propertyPath: _curve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d3306e17b664d148911ebce87ad8984, type: 2}
   m_IsPrefabParent: 0
@@ -3150,7 +3172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1517005686}
-  _duration: 0.4
+  _duration: 0.6
   _curve:
     serializedVersion: 2
     m_Curve:
