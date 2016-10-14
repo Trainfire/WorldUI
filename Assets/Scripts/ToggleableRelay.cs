@@ -1,31 +1,46 @@
 using UnityEngine;
-using System;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(ToggleableRelay))]
+public enum ToggleableRelayAction
+{
+    Show,
+    Hide
+}
+
+[RequireComponent(typeof(Toggleable))]
 public class ToggleableRelay : MonoBehaviour
 {
+    [SerializeField] private ToggleableEventType _trigger;
+    [SerializeField] private ToggleableRelayAction _action;
     [SerializeField] private List<Toggleable> _targets;
-    private Toggleable _relay;
 
+    private Toggleable _relay;
 
     void Awake()
     {
         _relay = GetComponent<Toggleable>();
-        _relay.Showed += OnShow;
-        _relay.Hidden += OnHide;
+        _relay.Triggered += OnTrigger;
 
         if (_targets == null)
             _targets = new List<Toggleable>();
     }
 
-    void OnShow()
+    void OnTrigger(ToggleableEventType eventType)
     {
-        _targets.ForEach(x => x.Show());
-    }
+        Debug.Log("Triggered: " + eventType);
 
-    void OnHide()
-    {
-        _targets.ForEach(x => x.Hide());
+        if (eventType == _trigger)
+        {
+            Debug.Log("Triggering action...");
+
+            if (_action == ToggleableRelayAction.Show)
+            {
+                _targets.ForEach(x => x.Show());
+            }
+            else
+            {
+                _targets.ForEach(x => x.Hide());
+            }
+        }
     }
 }

@@ -26,8 +26,8 @@ public class Map : MonoBehaviour
     void Awake()
     {
         _toggleable = gameObject.GetOrAddComponent<Toggleable>();
-        _toggleable.Showed += OnShow;
-        _toggleable.Hidden += OnHide;
+        _toggleable.ShowStarted += OnShow;
+        _toggleable.HideFinished += OnHide;
     }
 
     void OnHide()

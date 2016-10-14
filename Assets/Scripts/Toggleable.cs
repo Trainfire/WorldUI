@@ -3,13 +3,24 @@ using System;
 using Framework;
 using Framework.Animation;
 
+public enum ToggleableEventType
+{
+    ShowStarted,
+    ShowFinished,
+    HideStarted,
+    HideFinished
+}
+
 /// <summary>
 /// Allows a GameObject to be toggled on and off with callbacks and optional animations.
 /// </summary>
 public class Toggleable : MonoBehaviour
 {
-    public event Action Showed;
-    public event Action Hidden;
+    public event Action<ToggleableEventType> Triggered;
+    public event Action ShowStarted;
+    public event Action ShowFinished;
+    public event Action HideStarted;
+    public event Action HideFinished;
 
     [SerializeField] private bool _autoDisable;
     [SerializeField] private AnimationGroup _showAnimations;
@@ -21,6 +32,9 @@ public class Toggleable : MonoBehaviour
     {
         if (_hideAnimations != null)
             _hideAnimations.Completed += OnHideAnimationsComplete;
+
+        if (_showAnimations != null)
+            _showAnimations.Completed += OnShowAnimationsComplete;
     }
 
     void Start()
@@ -41,7 +55,8 @@ public class Toggleable : MonoBehaviour
         if (_showAnimations != null)
             _showAnimations.Play();
 
-        Showed.InvokeSafe();
+        ShowStarted.InvokeSafe();
+        Triggered.InvokeSafe(ToggleableEventType.ShowStarted);
     }
 
     public virtual void Hide()
@@ -50,6 +65,8 @@ public class Toggleable : MonoBehaviour
 
         if (_showAnimations != null)
             _showAnimations.Stop();
+
+        Triggered.InvokeSafe(ToggleableEventType.HideStarted);
 
         if (_hideAnimations != null)
         {
@@ -87,6 +104,12 @@ public class Toggleable : MonoBehaviour
         }
     }
 
+    void OnShowAnimationsComplete(AnimationGroup obj)
+    {
+        ShowFinished.InvokeSafe();
+        Triggered.InvokeSafe(ToggleableEventType.ShowFinished);
+    }
+
     void OnHideAnimationsComplete(AnimationGroup obj)
     {
         FinishHide();
@@ -97,6 +120,7 @@ public class Toggleable : MonoBehaviour
         if (_autoDisable)
             gameObject.SetActive(false);
 
-        Hidden.InvokeSafe();
+        HideFinished.InvokeSafe();
+        Triggered.InvokeSafe(ToggleableEventType.HideFinished);
     }
 }

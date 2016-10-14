@@ -127,8 +127,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 29269401}
-  - 114: {fileID: 29269404}
   - 114: {fileID: 29269403}
+  - 114: {fileID: 29269404}
   - 114: {fileID: 29269402}
   - 114: {fileID: 29269405}
   m_Layer: 8
@@ -175,11 +175,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 29269400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94a96351ad971254886bf7e7afe77991, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f65636e9f3cd3e4489ddc6d51052044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targets:
-  - {fileID: 562384275}
+  _autoDisable: 1
+  _showAnimations: {fileID: 857832439}
+  _hideAnimations: {fileID: 278008549}
 --- !u!114 &29269404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,12 +189,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 29269400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f65636e9f3cd3e4489ddc6d51052044, type: 3}
+  m_Script: {fileID: 11500000, guid: 94a96351ad971254886bf7e7afe77991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoDisable: 1
-  _showAnimations: {fileID: 857832439}
-  _hideAnimations: {fileID: 278008549}
+  _trigger: 0
+  _action: 0
+  _targets:
+  - {fileID: 562384275}
 --- !u!114 &29269405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,7 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 29269400}
-  _duration: 0.4
+  _duration: 0.6
   _curve:
     serializedVersion: 2
     m_Curve:
@@ -739,7 +741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1126765205}
-  _duration: 0.2
+  _duration: 0.4
   _curve:
     serializedVersion: 2
     m_Curve:
@@ -758,7 +760,7 @@ MonoBehaviour:
     m_RotationOrder: 0
   _material: {fileID: 0}
   _useSharedMaterial: 1
-  _from: {r: 1, g: 1, b: 1, a: 1}
+  _from: {r: 1, g: 1, b: 1, a: 0.78431374}
   _to: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &311710926
 GameObject:
@@ -1635,7 +1637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 29269400}
-  _duration: 0.4
+  _duration: 0.6
   _curve:
     serializedVersion: 2
     m_Curve:
@@ -1653,7 +1655,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   _useFromValue: 1
-  _from: {x: 0, y: 0, z: 0}
+  _from: {x: 1, y: 4, z: 1}
   _to: {x: 1, y: 1, z: 1}
 --- !u!114 &857832441
 MonoBehaviour:
@@ -1667,7 +1669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1126765205}
-  _duration: 0.2
+  _duration: 0.4
   _curve:
     serializedVersion: 2
     m_Curve:
@@ -1687,7 +1689,7 @@ MonoBehaviour:
   _material: {fileID: 0}
   _useSharedMaterial: 1
   _from: {r: 1, g: 1, b: 1, a: 0}
-  _to: {r: 1, g: 1, b: 1, a: 1}
+  _to: {r: 1, g: 1, b: 1, a: 0.78431374}
 --- !u!1 &924757954
 GameObject:
   m_ObjectHideFlags: 0
@@ -2536,13 +2538,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1570807734}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dceee1164c1540e4784972fa93313d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Axis: {x: 0, y: 1, z: 0}
-  Speed: 0.1
+  Speed: -0.05
 --- !u!4 &1570807738
 Transform:
   m_ObjectHideFlags: 0
@@ -2819,6 +2821,15 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.y
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012229190098, guid: 9d3306e17b664d148911ebce87ad8984, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012058866760, guid: 9d3306e17b664d148911ebce87ad8984,
+        type: 2}
+      propertyPath: _autoDisable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d3306e17b664d148911ebce87ad8984, type: 2}
