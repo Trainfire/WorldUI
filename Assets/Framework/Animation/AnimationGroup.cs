@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Linq;
 using System;
 using System.Collections.Generic;
-using Framework;
 
 namespace Framework.Animation
 {
@@ -11,7 +10,6 @@ namespace Framework.Animation
         public event Action<AnimationGroup> Completed;
 
         private List<AnimationBase> _animations;
-        private Queue<AnimationBase> _queue;
 
         void Awake()
         {
@@ -20,25 +18,13 @@ namespace Framework.Animation
             foreach (var anim in GetComponents<AnimationBase>())
             {
                 _animations.Add(anim);
-                anim.Triggered += OnAnimationTriggered;
+                anim.Triggered += OnAnimationEvent;
             }
-
-            _queue = new Queue<AnimationBase>();
         }
 
         public void Play()
         {
-            if (_animations.Any(x => x.WaitForCompletion))
-            {
-                Debug.Log("Using queue system...");
-                _queue.Clear();
-                _animations.ForEach(x => _queue.Enqueue(x));
-                _queue.Peek().Play();
-            }
-            else
-            {
-                _animations.ForEach(x => x.Play());
-            }
+            UpdateQueue();
         }
 
         public void Stop()
@@ -46,31 +32,30 @@ namespace Framework.Animation
             _animations.ForEach(x => x.Stop());
         }
 
-        void OnAnimationTriggered(AnimationEvent animEvent)
+        void UpdateQueue()
         {
-            if (animEvent.PlaybackType == AnimationEventType.PlayComplete)
-            {
-                if (_animations.Any(x => x.WaitForCompletion))
-                {
-                    if (animEvent.Sender == _queue.Peek())
-                    {
-                        _queue.Dequeue();
+            var playbackQueue = _animations.Where(x => x.State == AnimationPlaybackState.Stopped).ToList();
 
-                        if (_queue.Count == 0)
-                        {
-                            Completed.InvokeSafe(this);
-                        }
-                        else
-                        {
-                            var next = _queue.Peek();
-                            Debug.Log("Playing next anim: " + next.GetType().Name);
-                            next.Play();
-                        }
-                    }
-                }
-                else if (_animations.TrueForAll(x => x.State == AnimationPlaybackState.Stopped))
+            foreach (var item in playbackQueue)
+            {
+                item.Play();
+
+                if (item.WaitForCompletion)
+                    break;
+            }
+        }
+
+        void OnAnimationEvent(AnimationEvent obj)
+        {
+            if(obj.PlaybackType == AnimationEventType.PlayComplete)
+            {
+                if (_animations.TrueForAll(x => x.State == AnimationPlaybackState.PlayComplete))
                 {
                     Completed.InvokeSafe(this);
+                }
+                else
+                {
+                    UpdateQueue();
                 }
             }
         }

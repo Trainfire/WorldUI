@@ -7,6 +7,7 @@ namespace Framework.Animation
     {
         Stopped,
         Playing,
+        PlayComplete,
     }
 
     public enum AnimationEventType
@@ -61,7 +62,7 @@ namespace Framework.Animation
 
         protected void TriggerPlayComplete()
         {
-            State = AnimationPlaybackState.Stopped;
+            State = AnimationPlaybackState.PlayComplete;
             Triggered.InvokeSafe(new AnimationEvent(this, AnimationEventType.PlayComplete));
         }
     }
