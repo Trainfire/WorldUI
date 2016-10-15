@@ -8,12 +8,6 @@ public class MapObjectiveMarker : UIDataView<ObjectiveMarker>, IMapElement
     [SerializeField] private Text _objectiveName;
     [SerializeField] private Text _objectiveId;
 
-    void Awake()
-    {
-        _objectiveName.text = "N/A";
-        _objectiveId.text = "0";
-    }
-
     public override void OnSetData(ObjectiveMarker data)
     {
         base.OnSetData(data);

@@ -39,7 +39,7 @@ public class Toggleable : MonoBehaviour
 
     void Start()
     {
-        Set(gameObject.activeSelf);
+        //Set(gameObject.activeSelf);
     }
 
     public virtual void Show()
