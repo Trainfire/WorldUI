@@ -615,7 +615,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   _waitForCompletion: 0
-  _size: {x: 100, y: 200}
+  _size: {x: 100, y: 150}
 --- !u!114 &114000011510064716
 MonoBehaviour:
   m_ObjectHideFlags: 1
