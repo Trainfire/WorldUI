@@ -27,12 +27,8 @@ public class ToggleableRelay : MonoBehaviour
 
     void OnTrigger(ToggleableEventType eventType)
     {
-        Debug.Log("Triggered: " + eventType);
-
         if (eventType == _trigger)
         {
-            Debug.Log("Triggering action...");
-
             if (_action == ToggleableRelayAction.Show)
             {
                 _targets.ForEach(x => x.Show());
