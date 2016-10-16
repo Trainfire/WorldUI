@@ -1,22 +1,20 @@
 using UnityEngine;
-using System.Collections;
-using System;
+using UnityEngine.UI;
+using Framework.UI;
 
-[RequireComponent(typeof(Map))]
-public class MapPlayerMarker : MonoBehaviour
+public class MapPlayerMarker : UIDataView<Player>, IMapElement
 {
-    [SerializeField] private Transform _playerMarker;
+    [SerializeField]
+    private Text _playerName;
 
-    private Map _miniMap;
-
-    void Awake()
+    public override void OnSetData(Player player)
     {
-        _miniMap = GetComponent<Map>();
+        base.OnSetData(player);
+        _playerName.text = player.Data.Name;
     }
 
-    void Update()
+    void IMapElement.Update(Map map)
     {
-        if (_playerMarker != null)
-            _playerMarker.transform.position = _miniMap.PlayerPosition;
+        transform.position = map.GetPosition(Data.transform.position);
     }
 }

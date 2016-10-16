@@ -49,7 +49,7 @@ public class PathTrackEditor : Editor
             GUILayout.EndArea();
         }
 
-        if (t.Looped)
+        if (t.Looped && t.Last() != null && t.First() != null)
             Handles.DrawAAPolyLine(t.Last().Position, t.First().Position);
     }
 }
