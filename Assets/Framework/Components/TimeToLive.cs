@@ -7,10 +7,23 @@ namespace Framework
     {
         public event Action<TimeToLive> Destroyed;
 
-        public float Delay { get; set; }
+        [SerializeField] private bool _startAutomatically;
+        [SerializeField] private float _delay;
+
+        public float Delay
+        {
+            get { return _delay; }
+            set { _delay = value; }
+        }
 
         private float _timeStamp;
         private bool _started;
+
+        void Start()
+        {
+            if (_startAutomatically)
+                StartTimer();
+        }
 
         public void StartTimer()
         {

@@ -35,14 +35,11 @@ namespace Framework
 
         public void QuitGame()
         {
-            if (Application.isEditor)
-            {
-                UnityEditor.EditorApplication.isPlaying = false;
-            }
-            else
-            {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
                 Application.Quit();
-            }
+#endif
         }
 
         public void LoadMainMenu()
@@ -62,7 +59,7 @@ namespace Framework
 
         public void ReloadLevel()
         {
-            _zoneManager.SetZone(GameZone.InGame, _zoneManager.ActiveScene);
+            _zoneManager.SetZone(GameZone.InGame, "InGame", _zoneManager.ActiveScene);
         }
 
         void IInputHandler.HandleInput(InputActionEvent action)

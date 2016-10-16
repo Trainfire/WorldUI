@@ -9,5 +9,8 @@ public class MapController : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
             Map.GetComponent<Toggleable>().Toggle();
+
+        if (Input.GetKeyUp(KeyCode.Tab))
+            Time.timeScale = Time.timeScale > 0.1f ? 0.1f : 1f;
     }
 }
