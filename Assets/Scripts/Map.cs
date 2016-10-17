@@ -13,7 +13,7 @@ public class Map : MonoBehaviour
     public event Action<Map> Hidden;
 
     public GameObject WorldRoot;
-    public GameObject WorldPlayer;
+    public GameObject Reference;
     public float MapScale;
     public Material MapMaterial;
 
@@ -34,14 +34,14 @@ public class Map : MonoBehaviour
 
     void OnHide()
     {
-        if (_geometry != null)
-            Destroy(_geometry);
-
         Hidden.InvokeSafe(this);
     }
 
     void OnShow()
     {
+        if (_geometry != null)
+            Destroy(_geometry);
+
         Generate();
 
         Shown.InvokeSafe(this);
@@ -49,7 +49,7 @@ public class Map : MonoBehaviour
 
     void Generate()
     {
-        var layer = LayerMask.NameToLayer("MiniMap");
+        var layer = LayerMask.NameToLayer("UI");
 
         _geometry = Instantiate(WorldRoot);
         _geometry.layer = layer;
@@ -68,7 +68,7 @@ public class Map : MonoBehaviour
 
     void Update()
     {
-        transform.position = WorldPlayer.transform.position;
+        transform.position = Reference.transform.position;
 
         if (_geometry != null)
         {
@@ -82,12 +82,12 @@ public class Map : MonoBehaviour
     /// </summary>
     public Vector3 Origin
     {
-        get { return transform.position - WorldPlayer.transform.position * MapScale; }
+        get { return Reference.transform.position - (Reference.transform.position * MapScale); }
     }
 
     public Vector3 PlayerPosition
     {
-        get { return GetPosition(WorldPlayer.transform.position); }
+        get { return GetPosition(Reference.transform.position); }
     }
 
     /// <summary>

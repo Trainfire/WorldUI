@@ -74,11 +74,11 @@ public abstract class MapMarkers<TData, TView> : MonoBehaviour
 
     void OnEnable()
     {
-        _markers.ForEach(x => x.gameObject.SetActive(true));
+        _markers.ForEach(x => x.GetComponent<Toggleable>().Show());
     }
 
     void OnDisable()
     {
-        _markers.ForEach(x => x.gameObject.SetActive(false));
+        _markers.ForEach(x => x.GetComponent<Toggleable>().Hide());
     }
 }

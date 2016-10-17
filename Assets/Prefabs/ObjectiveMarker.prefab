@@ -21,7 +21,7 @@ GameObject:
   - 224: {fileID: 224000012552463632}
   - 222: {fileID: 222000010675358702}
   - 114: {fileID: 114000013076343012}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - 224: {fileID: 224000010753943452}
   - 222: {fileID: 222000010293777362}
   - 114: {fileID: 114000012908284304}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - 222: {fileID: 222000013647133720}
   - 114: {fileID: 114000013220057584}
   - 114: {fileID: 114000010046719394}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - 224: {fileID: 224000011077460822}
   - 222: {fileID: 222000011839755768}
   - 114: {fileID: 114000013962851958}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - 33: {fileID: 33000011765211618}
   - 64: {fileID: 64000012085945832}
   - 23: {fileID: 23000014255118436}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013577397634}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - 222: {fileID: 222000010213187616}
   - 114: {fileID: 114000012388310828}
   - 114: {fileID: 114000014177128430}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - 223: {fileID: 223000011891874106}
   - 114: {fileID: 114000010268039522}
   - 225: {fileID: 225000012235199244}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - 114: {fileID: 114000010278924292}
   - 114: {fileID: 114000013778250832}
   - 114: {fileID: 114000013959050548}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: AnimOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - 114: {fileID: 114000012964063096}
   - 114: {fileID: 114000011580080494}
   - 114: {fileID: 114000013711494044}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - 222: {fileID: 222000011193970822}
   - 114: {fileID: 114000011510064716}
   - 114: {fileID: 114000012763436632}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - 114: {fileID: 114000010453576746}
   - 114: {fileID: 114000010761694354}
   - 114: {fileID: 114000010838103942}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ObjectiveMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 224000014117260920}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - 114: {fileID: 114000014265453026}
   - 114: {fileID: 114000010979754018}
   - 114: {fileID: 114000012585808644}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: AnimIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   - 222: {fileID: 222000013152436632}
   - 114: {fileID: 114000010940196124}
   - 114: {fileID: 114000010455649218}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - 114: {fileID: 114000012553652434}
   - 114: {fileID: 114000012400773404}
   - 114: {fileID: 114000010210640838}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
